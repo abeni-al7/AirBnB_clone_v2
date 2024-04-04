@@ -50,10 +50,7 @@ def do_deploy(archive_path):
 
 def deploy():
     """Creates an archive and deploys it"""
-    if not hasattr(env, 'archive_exists'):
-        env.archive_exists = True
-        archive = do_pack()
-        if archive is None:
-            return False
-        env.archive_path = archive
-    return do_deploy(env.archive_path)
+    archive = do_pack()
+    if archive is None:
+        return False
+    return do_deploy(archive)
