@@ -55,4 +55,5 @@ def deploy():
         archive = do_pack()
         if archive is None:
             return False
-    return do_deploy(archive)
+        env.archive_path = archive
+    return do_deploy(env.archive_path)
