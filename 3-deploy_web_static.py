@@ -3,7 +3,8 @@
 contents of the web_static folder of my AirBnB Clone repo,
 using the function do_pack.
 It also distributes an archive to my web
-servers, using the function do_deploy:"""
+servers, using the function do_deploy.
+It also creates and distributes an archive to my web servers,"""
 from fabric.api import local
 from fabric.api import env
 from fabric.api import put
@@ -45,3 +46,11 @@ def do_deploy(archive_path):
         return True
     except Exception:
         return False
+
+
+def deploy():
+    """Creates an archive and deploys it"""
+    archive = do_pack()
+    if not archive:
+        return False
+    return do_deploy(archive)
