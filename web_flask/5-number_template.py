@@ -19,22 +19,26 @@ def hbnb():
 
 @app.route('/c/<text>', strict_slashes=False)
 def c(text):
+    """Returns some text"""
     return "C" + text.replace("_", " ")
 
 
 @app.route('/python/', defaults={'text': 'is cool'}, strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
 def python(text):
+    """Returns some text"""
     return "Python " + text.replace("_", " ")
 
 
 @app.route('/number/<int:n>', strict_slashes=False)
 def number(n):
+    """Returns a template"""
     return "%d is a number" % n
 
 
 @app.route('/number_template/<int:n>', strict_slashes=False)
 def number_template(n):
+    """Renders a template"""
     return render_template('5-number.html', n=n)
 
 
