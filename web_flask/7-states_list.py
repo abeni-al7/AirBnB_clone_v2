@@ -1,22 +1,22 @@
 #!/usr/bin/python3
-"""This module starts a flask web app"""
+"""Starts a flask web app"""
 from flask import Flask, render_template
 from models import storage
+from models.state import State
 
 app = Flask(__name__)
 
 
 @app.teardown_appcontext
-def close_storage(exception):
-    """Closes the storage"""
+def teardown_db(exception):
     storage.close()
 
 
 @app.route('/states_list', strict_slashes=False)
 def states_list():
-    """Returns a list of all states"""
-    states = storage.all('State')
-    return render_template('7-states_list')
+    states = storage.all(State).values()
+    sorted_states = sorted(states, key=lambda state: state.name)
+    return render_template('7-states_list.html', states=sorted_states)
 
 
 if __name__ == '__main__':
